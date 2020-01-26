@@ -20,7 +20,7 @@ public class PrimeFinderThread extends Thread{
 		for (int i=a;i<=b;i++){						
 			if (isPrime(i)){
 				primes.add(i);
-				System.out.println(i);
+				//System.out.println(i);
 			}
 		}
 		
@@ -35,7 +35,9 @@ public class PrimeFinderThread extends Thread{
 	    }
 	    return true;
 	}
-
+	public void cleanPrimes(){
+		primes=new LinkedList<Integer>();
+	}
 	public List<Integer> getPrimes() {
 		return primes;
 	}

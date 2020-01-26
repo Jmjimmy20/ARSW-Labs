@@ -8,13 +8,10 @@ public class ExecutionThread extends Thread {
     PrimeFinderThread pf;
     PrimeFinderThread pf2;
     PrimeFinderThread pf3;
-    private static final class Lock { }
-    private final Object lock;
     public ExecutionThread(PrimeFinderThread a,PrimeFinderThread b,PrimeFinderThread c){
         pf = a;
         pf2 = b;
         pf3 = c;
-        lock = new Lock();
     }
     public void run() {
         Date startDate = new Date();
@@ -24,27 +21,21 @@ public class ExecutionThread extends Thread {
             endDate = new Date();
             numSeconds = (int) ((endDate.getTime() - startDate.getTime()) / 1000);
         }
-        try {
-            pf.wait();
-            pf2.wait();
-            pf3.wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        pf.suspend();
+        pf2.suspend();
+        pf3.suspend();
+        for(int i: pf.getPrimes()){
+            System.out.println(i);
         }
-
-        synchronized (lock) {
-            try {
-
-                pf.wait();
-                pf2.wait();
-                pf3.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        for(int i: pf2.getPrimes()){
+            System.out.println(i);
         }
-
-
-
+        for(int i: pf3.getPrimes()){
+            System.out.println(i);
+        }
+        pf.cleanPrimes();
+        pf2.cleanPrimes();
+        pf3.cleanPrimes();
         Scanner scanner = new Scanner(System.in);
         String entrada  ="";
         do{
@@ -52,8 +43,25 @@ public class ExecutionThread extends Thread {
             entrada  = scanner.nextLine();
         }
         while(!entrada.equals(""));
-        pf.notify();
-        pf2.notify();
-        pf3.notify();
+        pf.resume();
+        pf2.resume();
+        pf3.resume();
+        try {
+            pf.join();
+            pf2.join();
+            pf3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for(int i: pf.getPrimes()){
+            System.out.println(i);
+        }
+        for(int i: pf2.getPrimes()){
+            System.out.println(i);
+        }
+        for(int i: pf3.getPrimes()){
+            System.out.println(i);
+        }
     }
 }
