@@ -1,5 +1,10 @@
 package edu.eci.arsw.math;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.lang.Math;
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 
 ///  <summary>
 ///  An implementation of the Bailey-Borwein-Plouffe formula for calculating hexadecimal
@@ -11,66 +16,61 @@ public class PiDigits {
 
     private static int DigitsPerSum = 8;
     private static double Epsilon = 1e-17;
-    
-	public static byte[] getDigits(int N) {
-		double digitos = 1000000;
-		int sumando = (int) Math.ceil(digitos/N);
-		int start=0;
-		int end=sumando;
-		PiThread[] arregloThread = new PiThread[N];
-		for (int i=0;i<N;i++) {
-			arregloThread[i]= new PiThread(start,end);
-			start = end+1;
-			if (digitos-end+sumando>0) {
-				end = (int) (digitos-1);
-			} else {
-				end +=sumando;
-			}
-			try {
-				arregloThread[i].join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
-		return null;
-	    	
-	}
+
+
     /**
      * Returns a range of hexadecimal digits of pi.
      * @param start The starting location of the range.
-     * @param count The number of digits to return
+     * @param digitos The quantity of digits
+     * @param N The number of threads
      * @return An array containing the hexadecimal digits.
      */
     
-    public static byte[] getDigits(int start, int count) {
+    public static byte[] getDigits(int start,int digitos, int N) {
         if (start < 0) {
             throw new RuntimeException("Invalid Interval");
         }
 
-        if (count < 0) {
+        if (digitos < 0) {
             throw new RuntimeException("Invalid Interval");
         }
-
-        byte[] digits = new byte[count];
-        double sum = 0;
-
-        for (int i = 0; i < count; i++) {
-            if (i % DigitsPerSum == 0) {
-                sum = 4 * sum(1, start)
-                        - 2 * sum(4, start)
-                        - sum(5, start)
-                        - sum(6, start);
-
-                start += DigitsPerSum;
+        byte[] total = new byte[(int)digitos];
+        int sumando = digitos/N;
+        int end=sumando;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+        PiThread[] arregloThread = new PiThread[N];
+        for (int i=0;i<N;i++) {
+            if (i==N-1) {
+                arregloThread[i] = new PiThread(start, sumando+(digitos%N));
+            } else {
+                arregloThread[i] = new PiThread(start, sumando);
+            }
+            arregloThread[i].start();
+            start = end;
+            if (digitos-end<sumando) {
+                end = (int) (digitos-1);
+            } else {
+                end +=sumando;
             }
 
-            sum = 16 * (sum - Math.floor(sum));
-            digits[i] = (byte) sum;
         }
-        
-        return digits;
+        for (int i=0;i<N;i++){
+            try {
+                arregloThread[i].join();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        for (int i=0;i<N;i++){
+            try {
+                outputStream.write(arregloThread[i].getDigits());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return outputStream.toByteArray();
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class PiDigits {
     /// <param name="m"></param>
     /// <param name="n"></param>
     /// <returns></returns>
-    private static double sum(int m, int n) {
+    public static double sum(int m, int n) {
         double sum = 0;
         int d = m;
         int power = n;
