@@ -22,3 +22,35 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 ![](Capturas/PruebaDigits.PNG)
 
 3. **Part III - Performance Evaluation**
+
+- Resultados de CPU1
+![](Capturas/CPU1.jpeg)
+
+- Resultados de CPU2
+![](Capturas/CPU2.jpeg)
+
+  De acuerdo con la ley de Amdahls, donde S (n) es la mejora teórica del rendimiento, P la fracción paralela del algoritmo, y n el número de hilos, cuanto mayor sea n, mayor será la mejora.
+  
+  1 - ¿Por qué no se logra el mejor rendimiento con los 500 hilos? ¿Cómo se compara este rendimiento cuando se usan 200?
+  
+    -
+  
+  2 - ¿Cómo se compara este rendimiento cuando se usan 200?
+  
+    -
+  
+  3 - ¿Cómo se comporta la solución usando tantos subprocesos de procesamiento como núcleos en comparación con el resultado de usar el doble?
+  
+    -
+  
+   De acuerdo con lo anterior, si para este problema en lugar de 500 hilos en una sola CPU, se pudiera usar 1 cable en cada una de las 500 máquinas hipotéticas.
+   
+   
+  4 - ¿Se aplicaría mejor la ley de Amdahls?
+  
+    -
+  
+  5 - Si, en cambio, se usaran hilos c en máquinas distribuidas 500 / c (donde c es el número de núcleos de dichas máquinas), ¿se mejoraría?
+  
+    -
+
