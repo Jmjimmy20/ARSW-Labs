@@ -38,8 +38,16 @@ public class MainCanodromo {
                                     galgos[i].start();
 
                                 }
-                               
-				can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1); 
+                                for (Galgo i:galgos){
+                                    try {
+                                        i.join();
+                                    } catch(InterruptedException e){
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+				can.winnerDialog(reg.getGanador(),reg.getUltimaPosicionAlcanzada() - 1);
                                 System.out.println("El ganador fue:" + reg.getGanador());
                             }
                         }.start();
