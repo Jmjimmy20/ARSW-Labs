@@ -23,12 +23,6 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 
 3. **Part III - Performance Evaluation**
 
-- Resultados de CPU1
-![](Capturas/CPU1.jpeg)
-
-- Resultados de CPU2
-![](Capturas/CPU2.jpeg)
-
   De acuerdo con la ley de Amdahls, donde S (n) es la mejora teórica del rendimiento, P la fracción paralela del algoritmo, y n el número de hilos, cuanto mayor sea n, mayor será la mejora.
   
   1 - ¿Por qué no se logra el mejor rendimiento con los 500 hilos? ¿Cómo se compara este rendimiento cuando se usan 200?
@@ -53,4 +47,24 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
   5 - Si, en cambio, se usaran hilos c en máquinas distribuidas 500 / c (donde c es el número de núcleos de dichas máquinas), ¿se mejoraría?
   
     -
+    
+# Dogs Race case
+
+1. **Part I**
+
+1 - Script
+![](Capturas/PrimeFinder.PNG)
+
+2 - Main
+![](Capturas/PrimeMain.PNG)
+
+3 - Un solo hilo que busca primos entre 0 y 30,000,000. 
+![](Capturas/CPU1.jpeg)
+
+
+
+
+
+
+
 
