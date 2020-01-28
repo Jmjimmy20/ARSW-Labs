@@ -61,6 +61,9 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 3 - Un solo hilo que busca primos entre 0 y 30,000,000. 
 ![](Capturas/CPU1.jpeg)
 
+2. **Part II**
+
+3. **Part III**
 
 
 
