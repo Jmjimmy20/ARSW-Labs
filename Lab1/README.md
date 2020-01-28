@@ -1,4 +1,3 @@
-Realizado por Jimmy Andres Moya Suarez y Orlando Antonio Gelves Kerguelen
 
 # ARSW-Labs
 
@@ -66,6 +65,18 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 3. **Part III**
 
 
+
+
+## Desarrollado con:
+
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [JAVA](https://www.java.com/es/download) - Framework
+* [JDK](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) - Framework
+
+## Autores:
+
+* **Orlando Antonio Gelves Kerguelen**  [orlandoagk](https://github.com/orlandoagk)
+* **Jimmy Andres Moya Suarez**  [Jmjimmy20](https://github.com/Jmjimmy20)
 
 
 
