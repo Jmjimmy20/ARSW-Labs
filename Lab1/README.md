@@ -25,9 +25,25 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 
   De acuerdo con la ley de Amdahls, donde S (n) es la mejora teórica del rendimiento, P la fracción paralela del algoritmo, y n el número de hilos, cuanto mayor sea n, mayor será la mejora.
   
+  - Un solo hilo
+  
+  ![](Capturas/VM1.PNG)
+  
+  - Numero de cores e hilos
+  
+  ![](Capturas/VM2.PNG)
+  
+  - 200 Hilos
+  
+  ![](Capturas/VM3.PNG)
+  
+  - 500 Hilos
+  
+  ![](Capturas/VM4.PNG)
+  
   1 - ¿Por qué no se logra el mejor rendimiento con los 500 hilos? ¿Cómo se compara este rendimiento cuando se usan 200?
   
-    -
+    - 
   
   2 - ¿Cómo se compara este rendimiento cuando se usan 200?
   
