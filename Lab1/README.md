@@ -6,6 +6,7 @@
 Este laboratorio contiene ejercicios de introducción a la programacion en java usando hilos.
 
 1. **Part I - Introducción a hilos en java**
+
 La diferencia entre start() y run() es que al usar start , no espera a que acabe un proceso para ejecutar el siguiente, se sobrepone uno sobre otro, al usar run() realiza el proceso en el orden programado, adicional a esto el metodo start usa 2 hilos de forma concurrente uno que usa el metodo start y el otro usa el metodo run, al llamar rl metodo run, solo se llama a si mismo.
 
 ![](Capturas/Captura.PNG)
@@ -52,12 +53,15 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 1. **Part I**
 
 1 - Script
+
 ![](Capturas/PrimeFinder.PNG)
 
 2 - Main
+
 ![](Capturas/PrimeMain.PNG)
 
 3 - Un solo hilo que busca primos entre 0 y 30,000,000. 
+
 ![](Capturas/CPU1.jpeg)
 
 2. **Part II**
