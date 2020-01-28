@@ -15,5 +15,10 @@ La diferencia entre start() y run() es que al usar start , no espera a que acabe
 
 Se modifico la funcion "PiDigits.getDigits()" para que reciba un parametro N el cual corresponde al numero de hilos en el que se va a dividir la solución de la siguiente forma:
 
+![](Capturas/getDigits.PNG)
 
-Se realizo la siguiente prueba:
+Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la solución:
+
+![](Capturas/PruebaDigits.PNG)
+
+3. **Part III - Performance Evaluation**
