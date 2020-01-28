@@ -9,8 +9,5 @@
         <module name="PiDigits" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="PiDigits" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

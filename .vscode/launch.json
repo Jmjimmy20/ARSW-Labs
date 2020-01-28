@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Main<PiDigits>",
+            "request": "launch",
+            "mainClass": "edu.eci.arsw.math.Main",
+            "projectName": "PiDigits"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-CountThreadsMain<PiDigits>",
+            "request": "launch",
+            "mainClass": "edu.eci.arsw.threads.CountThreadsMain",
+            "projectName": "PiDigits"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MainCanodromo<conc-canodromo>",
+            "request": "launch",
+            "mainClass": "arsw.threads.MainCanodromo",
+            "projectName": "conc-canodromo"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Main<primesearch>",
+            "request": "launch",
+            "mainClass": "edu.eci.arsw.primefinder.Main",
+            "projectName": "primesearch"
+        }
+    ]
+}
