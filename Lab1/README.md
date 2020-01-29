@@ -1,6 +1,12 @@
 
 # ARSW-Labs
 
+## Compilar y ejecutar
+
+Para compilar: mvn package
+Para ejecutar la clase principal: mvn exec:java -Dexec.mainClass="edu.eci.arsw.threads.MainCanodromo"
+                                  mvn exec:java -Dexec.mainClass="edu.eci.arsw.primefinder.Main"
+
 # Lab01 (BBP Formula)
 
 Este laboratorio contiene ejercicios de introducción a la programacion en java usando hilos.
@@ -45,9 +51,9 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
   
       - En este caso aunque tengamos mas hilos para trabajar el costo del interleaving y el cambio de contexto hace mas lento el usar 500 hilos a 200
   
-  2 - ¿Cómo se comporta la solución usando tantos subprocesos de procesamiento como núcleos en comparación con el resultado de usar el doble?
+  2 - ¿Cómo se comporta la solución usando tantos hilos como núcleos en comparación con el resultado de usar el doble?
   
-    -
+    - La solución seria optima ya que al usar el doble de hilos que de cores se esta aprovechando la velocidad sin excederse en el uso de hilos.
   
    De acuerdo con lo anterior, si para este problema en lugar de 500 hilos en una sola CPU, se pudiera usar 1 "wire" en cada una de las 500 máquinas hipotéticas.
    
@@ -73,10 +79,15 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
 
 ![](Capturas/CPU1.jpeg)
 
-2. **Part II**
+1. **Part III**
 
-3. **Part III**
+![](Capturas/ui.PNG)
 
+![](Capturas/uiRes.PNG)
+
+![](Capturas/code.PNG)
+
+![](Capturas/stop.PNG)
 
 
 
