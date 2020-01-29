@@ -41,28 +41,21 @@ Se realizo la siguiente prueba en la cual se usa de 1 a 3 hilos para general la 
   
   ![](Capturas/VM4.PNG)
   
-  1 - ¿Por qué no se logra el mejor rendimiento con los 500 hilos?
+  1 - ¿Por qué no se logra el mejor rendimiento con los 500 hilos?, ¿Cómo se compara este rendimiento cuando se usan 200?
   
       - En este caso aunque tengamos mas hilos para trabajar el costo del interleaving y el cambio de contexto hace mas lento el usar 500 hilos a 200
   
-  2 - ¿Cómo se compara este rendimiento cuando se usan 200?
-  
-    - Al generar 200 hilos, el CPU no tiene todos los recursos para administrarlos de una forma correcta por lo cual la maquina se ve afectada en eficiencia y es muy demorado tener un resultado.
-  
-  3 - ¿Cómo se comporta la solución usando tantos subprocesos de procesamiento como núcleos en comparación con el resultado de usar el doble?
+  2 - ¿Cómo se comporta la solución usando tantos subprocesos de procesamiento como núcleos en comparación con el resultado de usar el doble?
   
     -
   
    De acuerdo con lo anterior, si para este problema en lugar de 500 hilos en una sola CPU, se pudiera usar 1 "wire" en cada una de las 500 máquinas hipotéticas.
    
    
-  4 - ¿Se aplicaría mejor la ley de Amdahls?
+  3 - ¿Se aplicaría mejor la ley de Amdahls?, Si, en cambio, se usaran c hilos en 500/c máquinas distribuidas (donde c es el número de núcleos de dichas máquinas), ¿se mejoraría?
   
-    - EL tiempo total entre cambiar no es funcional ya que la suma entre esos cambios hace que entre mas grande sea, no mejore mas el rendimiento.
+    - Si seria mejor aplicarlo, con eso se mejora el tiempo respecto al cambio entre hilos. En el segundo caso, 500/c mejoraria el tiempo pero de igual forma se le cargaria mucho al CPU por que se debe contar con el tiempo de cambio entre hilos.
   
-  5 - Si, en cambio, se usaran hilos c en máquinas distribuidas 500 / c (donde c es el número de núcleos de dichas máquinas), ¿se mejoraría?
-  
-    -
     
 # Dogs Race case
 
