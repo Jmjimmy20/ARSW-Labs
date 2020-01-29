@@ -5,6 +5,8 @@
  */
 package edu.eci.arst.concprg.prodcons;
 
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -21,9 +23,9 @@ public class StartProduction {
     public static void main(String[] args) {
         
         Queue<Integer> queue=new LinkedBlockingQueue<>();
+        Mutex m = new Mutex();
         
-        
-        new Producer(queue,Long.MAX_VALUE).start();
+        new Producer(queue,6,m).start();
         
         //let the producer create products for 5 seconds (stock).
         try {
@@ -33,7 +35,7 @@ public class StartProduction {
         }
         
         
-        new Consumer(queue).start();
+        new Consumer(queue,m).start();
     }
     
 

@@ -5,6 +5,8 @@
  */
 package edu.eci.arst.concprg.prodcons;
 
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
+
 import java.util.Queue;
 import java.util.Random;
 import java.util.logging.Level;
@@ -21,21 +23,30 @@ public class Producer extends Thread {
     private int dataSeed = 0;
     private Random rand=null;
     private final long stockLimit;
+    Mutex m;
 
-    public Producer(Queue<Integer> queue,long stockLimit) {
+    public Producer(Queue<Integer> queue,long stockLimit, Mutex m) {
         this.queue = queue;
         rand = new Random(System.currentTimeMillis());
         this.stockLimit=stockLimit;
+        this.m = m;
     }
 
     @Override
     public void run() {
         while (true) {
 
-            dataSeed = dataSeed + rand.nextInt(100);
-            System.out.println("Producer added " + dataSeed);
-            queue.add(dataSeed);
-            
+
+            if (queue.size() < stockLimit) {
+                dataSeed = dataSeed + rand.nextInt(100);
+                System.out.println("Producer added " + dataSeed);
+                queue.add(dataSeed);
+            }
+            if (queue.size() > 9) {
+                synchronized (m) {
+                    m.notify();
+                }
+            }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
