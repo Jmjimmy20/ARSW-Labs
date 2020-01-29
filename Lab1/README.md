@@ -4,6 +4,7 @@
 ## Compilar y ejecutar
 
 Para compilar: mvn package
+
 Para ejecutar la clase principal: mvn exec:java -Dexec.mainClass="edu.eci.arsw.threads.MainCanodromo"
                                   mvn exec:java -Dexec.mainClass="edu.eci.arsw.primefinder.Main"
 
