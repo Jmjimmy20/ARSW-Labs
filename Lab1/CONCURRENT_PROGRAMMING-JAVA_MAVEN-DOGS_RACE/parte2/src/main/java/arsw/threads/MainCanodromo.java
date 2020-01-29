@@ -12,6 +12,8 @@ public class MainCanodromo {
     private static Canodromo can;
 
     private static RegistroLlegada reg = new RegistroLlegada();
+    private static final class Lock { }
+    private static final Object lock = new Lock();
 
     public static void main(String[] args) {
         can = new Canodromo(17, 100);
@@ -58,9 +60,13 @@ public class MainCanodromo {
 
         can.setStopAction(
                 new ActionListener() {
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("Carrera pausada!");
+                        for (int i=0;i<galgos.length;i++){
+                                galgos[i].dejaDeCorrer();
+                        }
+                        System.out.println("La carrera se ha pausado");
                     }
                 }
         );
@@ -69,7 +75,10 @@ public class MainCanodromo {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("Carrera reanudada!");
+                        for (int z=0;z<galgos.length;z++){
+                                galgos[z].continuaCorriendo();
+                        }
+                        System.out.println("La carrera se ha reanudado");
                     }
                 }
         );
