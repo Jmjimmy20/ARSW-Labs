@@ -1,5 +1,7 @@
 package edu.eci.arsw.highlandersim;
 
+import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.util.LinkedList;
@@ -35,6 +37,7 @@ public class ControlFrame extends JFrame {
     private JLabel statisticsLabel;
     private JScrollPane scrollPane;
     private JTextField numOfImmortals;
+    private Mutex m;
 
     /**
      * Launch the application.
@@ -56,6 +59,7 @@ public class ControlFrame extends JFrame {
      * Create the frame.
      */
     public ControlFrame() {
+        m = new Mutex();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 647, 248);
         contentPane = new JPanel();
@@ -91,6 +95,9 @@ public class ControlFrame extends JFrame {
                 /*
 				 * COMPLETAR
                  */
+                for (Immortal im : immortals) {
+                    im.paraDePelear();
+                }
                 int sum = 0;
                 for (Immortal im : immortals) {
                     sum += im.getHealth();
@@ -108,9 +115,12 @@ public class ControlFrame extends JFrame {
 
         btnResume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                /**
-                 * IMPLEMENTAR
-                 */
+                for (Immortal im : immortals) {
+                    synchronized (m) {
+                        im.siguePeleando();
+                        m.notifyAll();
+                    }
+                }
 
             }
         });
@@ -152,7 +162,7 @@ public class ControlFrame extends JFrame {
             List<Immortal> il = new LinkedList<Immortal>();
 
             for (int i = 0; i < ni; i++) {
-                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb);
+                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb,m);
                 il.add(i1);
             }
             return il;
