@@ -138,6 +138,19 @@ public class ControlFrame extends JFrame {
         numOfImmortals.setColumns(10);
 
         JButton btnStop = new JButton("STOP");
+        btnStop.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (Immortal im : immortals) {
+                    synchronized (m) {
+                        im.detenerThread();
+                        btnResume.setEnabled(false);
+                        btnPauseAndCheck.setEnabled(false);
+
+                    }
+                }
+
+            }
+        });
         btnStop.setForeground(Color.RED);
         toolBar.add(btnStop);
 
@@ -162,9 +175,10 @@ public class ControlFrame extends JFrame {
             int ni = Integer.parseInt(numOfImmortals.getText());
 
             CopyOnWriteArrayList<Immortal> il = new CopyOnWriteArrayList<Immortal>();
-
+            Mutex unMutex = new Mutex();
+            Mutex otroMutex = new Mutex();
             for (int i = 0; i < ni; i++) {
-                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb,m);
+                Immortal i1 = new Immortal("im" + i, il, DEFAULT_IMMORTAL_HEALTH, DEFAULT_DAMAGE_VALUE,ucb,m,unMutex,otroMutex);
                 il.add(i1);
             }
             return il;
