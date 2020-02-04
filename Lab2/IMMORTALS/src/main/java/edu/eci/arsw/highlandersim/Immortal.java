@@ -35,7 +35,7 @@ public class Immortal extends Thread {
         estaPeleando = true;
         threadEjecutandose = true;
         this.m = m;
-        mutex = otroMutex;
+        mutex = new Mutex();
         this.mutexPelea = mutexPelea;
     }
 
@@ -46,31 +46,22 @@ public class Immortal extends Thread {
             }
             while (!estaPeleando){
                 synchronized (m) {
-                    m.notify();
+                    try {
+                        m.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-
-
             }
             Immortal im;
-
-                int myIndex = immortalsPopulation.indexOf(this);
-
-                int nextFighterIndex = r.nextInt(immortalsPopulation.size());
-
-
-                //avoid self-fight
-                if (nextFighterIndex == myIndex) {
-                    nextFighterIndex = ((nextFighterIndex + 1) % immortalsPopulation.size());
-                }
-
-                im = immortalsPopulation.get(nextFighterIndex);
-
-
-                this.fight(im);
-
-
-
-
+            int myIndex = immortalsPopulation.indexOf(this);
+            int nextFighterIndex = r.nextInt(immortalsPopulation.size());
+            //avoid self-fight
+            if (nextFighterIndex == myIndex) {
+                nextFighterIndex = ((nextFighterIndex + 1) % immortalsPopulation.size());
+            }
+            im = immortalsPopulation.get(nextFighterIndex);
+            this.fight(im);
             }
             try {
                 Thread.sleep(1);
@@ -87,25 +78,31 @@ public class Immortal extends Thread {
     }
     public void siguePeleando(){
         estaPeleando = true;
+        synchronized (m) {
+            m.notify();
+        }
     }
 
     public void fight(Immortal i2) {
-
-        if (i2.getHealth() > 0) {
-            i2.getAtomicHealth().addAndGet(defaultDamageValue * -1);
-            health.addAndGet(defaultDamageValue);
-            updateCallback.processReport("Fight: " + this + " vs " + i2+"\n");
-        } else {
-            i2.detenerThread();
-            immortalsPopulation.remove(i2);
-
-
+        synchronized (i2) {
+            if (i2.getHealth() > 0 && this.getHealth() > 0) {
+                i2.cambiarVida(-defaultDamageValue);
+                cambiarVida(defaultDamageValue);
+                synchronized (updateCallback) {
+                    updateCallback.processReport("Fight: " + this + " vs " + i2 + "\n");
+                }
+            }
         }
-
-
-
     }
 
+    public void cambiarVida(int vida){
+        health.addAndGet(vida);
+        if (health.get() <= 0){
+            paraDePelear();
+            detenerThread();
+            immortalsPopulation.remove(this);
+        }
+    }
 
 
     public AtomicInteger getAtomicHealth(){

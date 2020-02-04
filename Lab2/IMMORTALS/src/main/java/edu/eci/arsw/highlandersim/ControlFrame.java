@@ -81,6 +81,7 @@ public class ControlFrame extends JFrame {
                     for (Immortal im : immortals) {
                         im.start();
                     }
+
                 }
 
                 btnStart.setEnabled(false);
