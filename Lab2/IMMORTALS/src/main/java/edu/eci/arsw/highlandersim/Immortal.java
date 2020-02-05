@@ -20,7 +20,7 @@ public class Immortal extends Thread {
     private final String name;
 
     private final Random r = new Random(System.currentTimeMillis());
-    private boolean estaPeleando;
+    public boolean estaPeleando;
     private Mutex m,mutex,mutexPelea;
     private boolean threadEjecutandose;
 
