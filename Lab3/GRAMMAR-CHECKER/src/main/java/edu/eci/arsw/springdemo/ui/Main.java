@@ -6,13 +6,16 @@
 package edu.eci.arsw.springdemo.ui;
 
 import edu.eci.arsw.springdemo.GrammarChecker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author hcadavid
  */
+
 public class Main {
 
     public static void main(String a[]) {

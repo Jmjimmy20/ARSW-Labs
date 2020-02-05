@@ -8,5 +8,17 @@
 ">
 
     <context:component-scan base-package="edu.eci.arsw" />
+
+    <bean id="englishSpellChecker"
+          class="edu.eci.arsw.springdemo.EnglishSpellChecker"/>
+    <bean id="spanishSpellChecker"
+          class="edu.eci.arsw.springdemo.SpanishSpellChecker"/>
+    <bean
+            id="Grammar"
+            class="edu.eci.arsw.springdemo.GrammarChecker" >
     
+
+    </bean>
+
+
 </beans>

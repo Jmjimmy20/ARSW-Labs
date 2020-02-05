@@ -1,8 +1,11 @@
 package edu.eci.arsw.springdemo;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+@Service("spanishSpellChecker")
 public class SpanishSpellChecker implements SpellChecker {
 
 	@Override
