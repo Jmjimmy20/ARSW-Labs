@@ -5,9 +5,9 @@
 
 Para compilar: mvn package
 
-Para ejecutar la clase principal: mvn exec:java -Dexec.mainClass="edu.eci.arsw.threads.MainCanodromo"
+Para ejecutar la clase principal: mvn exec:java -Dexec.mainClass="edu.eci.arsw.highlandersim.ControlFrame"
 
-                                  mvn exec:java -Dexec.mainClass="edu.eci.arsw.primefinder.Main"
+                                  mvn exec:java -Dexec.mainClass="edu.eci.arst.concprg.prodcons.StartProduction"
 
 # Lab02 (Immortal Case)
 
