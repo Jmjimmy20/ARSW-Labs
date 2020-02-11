@@ -22,6 +22,7 @@ public class Blueprint {
     }
          
     public Blueprint(String author, String name){
+        this.author=author;
         this.name=name;
         points=new ArrayList<>();
     }
@@ -85,7 +86,7 @@ public class Blueprint {
         
         return true;
     }
-    
-    
-    
+
+
+
 }
