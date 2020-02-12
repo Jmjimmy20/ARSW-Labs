@@ -10,6 +10,10 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+
+import java.beans.Transient;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
@@ -69,6 +73,46 @@ public class InMemoryPersistenceTest {
         
     }
 
+
+    @Test
+    public void getBP() throws BlueprintPersistenceException, BlueprintNotFoundException
+    {
+        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
+
+        Point[] pts = new Point[]{new Point(20, 20), new Point(25, 25)};
+        Blueprint bp = new Blueprint("john", "mypaint", pts);
+        ibpp.saveBlueprint(bp);
+
+        Point[] pts0 = new Point[]{new Point(0, 0), new Point(10, 10)};
+        Blueprint bp0 = new Blueprint("john", "thepaint", pts0);
+        ibpp.saveBlueprint(bp0);
+
+        assertEquals(bp0, ibpp.getBlueprint("john", "thepaint"));
+
+    }
+
+
+    @Test
+    public void getBPAuthorTest() throws BlueprintPersistenceException, BlueprintNotFoundException {
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+        Set<Blueprint> blueprintsJohnTest = new HashSet<>();
+
+        Point[] pts0 = new Point[]{new Point(30, 30), new Point(5, 5)};
+        Blueprint bp0 = new Blueprint("mack", "mypaint", pts0);
+        ibpp.saveBlueprint(bp0);
+
+        Point[] pts1 = new Point[]{new Point(0, 0), new Point(10, 10)};
+        Blueprint bp1 = new Blueprint("john", "thepaint", pts1);
+        ibpp.saveBlueprint(bp1);
+        blueprintsJohnTest.add(bp1);
+
+        Point[] pts2 = new Point[]{new Point(0, 0), new Point(11, 10)};
+        Blueprint bp2 = new Blueprint("john", "thedfpaint", pts2);
+        ibpp.saveBlueprint(bp2);
+        blueprintsJohnTest.add(bp2);
+
+        assertEquals(blueprintsJohnTest, ibpp.getBlueprintsByAuthor("john"));
+    }
 
     
 }

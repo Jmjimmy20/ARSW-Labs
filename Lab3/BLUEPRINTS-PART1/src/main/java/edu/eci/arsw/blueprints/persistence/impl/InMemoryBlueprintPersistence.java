@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -52,5 +54,16 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return blueprints;
     }
 
+    @Override
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
+        Set<Blueprint> bpByAuthor = new HashSet<>();
+        for (Tuple<String, String> x : blueprints.keySet()) {
+            if (author.equals(x.getElem1())) {
+                bpByAuthor.add(blueprints.get(x));
+            }
+        }
+        return bpByAuthor;        
+        
+    }
 
 }
