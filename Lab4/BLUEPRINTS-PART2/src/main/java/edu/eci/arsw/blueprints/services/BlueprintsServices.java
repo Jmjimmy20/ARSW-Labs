@@ -66,7 +66,7 @@ public class BlueprintsServices {
      * @return the blueprint of the given name created by the given author
      * @throws BlueprintNotFoundException if there is no such blueprint
      */
-    public Blueprint getBlueprint(String author,String name) {
+    public Blueprint getBlueprint(String author,String name) throws ResourceNotFoundException{
         Blueprint temporal = null;
         try {
             temporal = bpp.getBlueprint(author,name);
