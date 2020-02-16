@@ -46,6 +46,11 @@ public class Blueprint {
         this.points.add(p);
     }
 
+    public void setPoints(List<Point> puntos){
+        points = puntos;
+
+    }
+
     @Override
     public String toString() {
         return "Blueprint{" + "author=" + author + ", name=" + name + '}';

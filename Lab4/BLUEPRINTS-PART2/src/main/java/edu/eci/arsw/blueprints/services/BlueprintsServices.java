@@ -56,6 +56,9 @@ public class BlueprintsServices {
         for(Blueprint i:bpp.getAllBluePrints().values()){
             temporal.add(i);
         }
+        if(temporal.size()==0){
+            throw new ResourceNotFoundException();
+        }
         return temporal;
     }
     
@@ -73,6 +76,10 @@ public class BlueprintsServices {
         } catch (BlueprintNotFoundException e) {
             e.printStackTrace();
         }
+        if (temporal==null){
+            throw new ResourceNotFoundException();
+
+        }
         return temporal;
     }
     
@@ -82,7 +89,7 @@ public class BlueprintsServices {
      * @return all the blueprints of the given author
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
-    public Set<Blueprint> getBlueprintsByAuthor(String author){
+    public Set<Blueprint> getBlueprintsByAuthor(String author) throws ResourceNotFoundException{
         Map<Tuple<String,String>,Blueprint> temporal = bpp.getAllBluePrints();
         Set<Blueprint> conjuntoBluePrints = new HashSet<Blueprint>();
 
@@ -91,7 +98,9 @@ public class BlueprintsServices {
                 conjuntoBluePrints.add(temporal.get(i));
             }
         }
-
+        if(conjuntoBluePrints.size()==0){
+            throw new ResourceNotFoundException();
+        }
         return conjuntoBluePrints;
     }
     
