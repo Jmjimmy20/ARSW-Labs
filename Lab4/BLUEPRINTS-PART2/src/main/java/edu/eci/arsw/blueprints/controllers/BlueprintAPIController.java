@@ -74,7 +74,7 @@ public class BlueprintAPIController {
     public ResponseEntity<?> insertarUnBlueprint(@RequestBody Blueprint blueprint){
         try {
             bps.addNewBlueprint(blueprint);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            return new ResponseEntity<>(bps.getBlueprint(blueprint.getAuthor(), blueprint.getName()), HttpStatus.CREATED);
         } catch (Exception ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error al crear un plano",HttpStatus.FORBIDDEN);
@@ -88,7 +88,7 @@ public class BlueprintAPIController {
         try {
             Blueprint editar = bps.getBlueprint(author,name);
             editar.setPoints(bp.getPoints());
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(bps.getBlueprint(author,name),HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(Exception.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error al cambiar un plano",HttpStatus.FORBIDDEN);
