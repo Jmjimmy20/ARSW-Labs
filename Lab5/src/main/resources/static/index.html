@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blueprints</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+    <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <script src="js/apimock.js"/>
+    <script src="js/app.js"/>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Blueprints</h1>
+        </div>
+        <div class="row">
+            <form action="GET" id="GetBlueprints">
+                <label for="nombre">
+                    Author
+                </label>
+                <input type="text" id="nombre">
+                <button type="submit">
+                    Get Blueprints
+                </button>
+            </form>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h2>Author´s Blueprints</h2><br>
+                <table class="table table-bordered">
+                    <thread>
+                        <tr>
+                            <th scope="col">Blueprint Name</th>
+                            <th scope="col">Number of Points</th>
+
+                            <th scope="col"><button type="button">Open</button></th>
+                        </tr>
+                    </thread>
+                    <tbody>
+                        <tr>
+                            <td>house</td>
+                            <td>233</td>
+                            <td><button type="button">Open</button></td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+                <h2>Total user points: 100</h2>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
