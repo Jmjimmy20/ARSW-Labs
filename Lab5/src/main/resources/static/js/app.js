@@ -25,11 +25,10 @@ var hallarAutor = ( function () {
     }
 
     var realizarBusqueda = function(name){
-
         try {
-            apimock.getBlueprintsByAuthor(realizarTabla, name)
+            apiclient.getBlueprintsByAuthor(realizarTabla, name);
             $("#textoNombre").text( name+'\'s Blueprints:');
-        } catch(exception){
+        } catch(nombreInvalido){
             alert("No estas colocando un nombre válido");
         }
 
@@ -38,22 +37,23 @@ var hallarAutor = ( function () {
         if (blueprint.points.length == 0){
             throw "noPuntos";
         }
+        $("#textoCanvas").text("Current blueprint: "+blueprint.name)
         var canvas = document.getElementById("myCanvas");
         var lapiz = canvas.getContext("2d");
         //Ver como borrar el contexto actual de un Canvas//ASDASDASDASDASDSADSADSD
-        lapiz.clearRect(0,0,canvas.width,canvas.height)
+        lapiz.clearRect(0,0,canvas.width,canvas.height);
+        lapiz.beginPath();
         lapiz.moveTo(blueprint.points[0].x,blueprint.points[0].y);
 
         blueprint.points.map(function(element){
             lapiz.lineTo(element.x,element.y);
         },1)
         lapiz.stroke();
-        alert(blueprint.author);
     }
 
     var realizarBusquedaPorNombre = function (author,name){
         try {
-            apimock.getBlueprintsByNameAndAuthor(name, author, realizarDibujo)
+            apiclient.getBlueprintsByNameAndAuthor(name, author, realizarDibujo)
         } catch (noPuntos){
             alert("Escogiste un plano que no cuenta con puntos, escoge otro o agrega puntos al plano actual")
         }
