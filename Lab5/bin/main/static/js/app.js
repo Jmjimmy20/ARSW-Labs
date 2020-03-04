@@ -17,7 +17,7 @@ var hallarAutor = ( function () {
         blueprints = realizarMap(blueprints);
         $("#filasBlueprints").empty();
         blueprints.map(function(element){
-            var markup = "<tr> <td>"+ element.name +"</td> <td>"+element.points+'</td> <td><button type="button"  class="btn btn-info" onclick="hallarAutor.realizarBusquedaPorNombre(\''+author+'\',\''+element.name+'\')">Open</button></td> </tr>';
+            var markup = "<tr> <td>"+ element.name +"</td> <td>"+element.points+'</td> <td><button type="button" onclick="hallarAutor.realizarBusquedaPorNombre(\''+author+'\',\''+element.name+'\')">Open</button></td> </tr>';
             $("#filasBlueprints").append(markup)
         })
         $("#sumaTotal").text(" Total user points: "+sumaDePuntos(blueprints));
@@ -40,7 +40,7 @@ var hallarAutor = ( function () {
         $("#textoCanvas").text("Current blueprint: "+blueprint.name)
         var canvas = document.getElementById("myCanvas");
         var lapiz = canvas.getContext("2d");
-
+        //Ver como borrar el contexto actual de un Canvas//ASDASDASDASDASDSADSADSD
         lapiz.clearRect(0,0,canvas.width,canvas.height);
         lapiz.beginPath();
         lapiz.moveTo(blueprint.points[0].x,blueprint.points[0].y);

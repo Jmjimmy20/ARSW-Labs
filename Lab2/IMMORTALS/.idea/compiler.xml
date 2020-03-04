@@ -7,8 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ConcurrentPrgExercises-Highlander-Prod-Cons" />
-        <module name="IMMORTALS" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="IMMORTALS" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
