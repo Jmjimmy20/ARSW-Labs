@@ -7,7 +7,7 @@
 - URL: http://localhost:8080
 - Autores para test: author1 y author2
 
-![](img/lab/1.PNG)
+![](img/1.PNG)
 
 
 
