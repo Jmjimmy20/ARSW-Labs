@@ -51,6 +51,29 @@ var hallarAutor = ( function () {
         lapiz.stroke();
     }
 
+
+
+    var pointSize = 3;
+
+    function getPosition(event){
+         var rect = myCanvas.getBoundingClientRect();
+         var x = event.clientX - rect.left;
+         var y = event.clientY - rect.top;
+
+         drawCoordinates(x,y);
+    }
+
+    function drawCoordinates(x,y){
+      	var ctx = document.getElementById("myCanvas").getContext("2d");
+
+
+      	ctx.fillStyle = "#ff2626"; // Red color
+
+        ctx.beginPath();
+        ctx.arc(x, y, pointSize, 0, Math.PI * 2, true);
+        ctx.fill();
+    }
+
     var realizarBusquedaPorNombre = function (author,name){
         try {
             apiclient.getBlueprintsByNameAndAuthor(name, author, realizarDibujo)
@@ -61,6 +84,11 @@ var hallarAutor = ( function () {
 
     return {
         realizarBusqueda:realizarBusqueda,
-        realizarBusquedaPorNombre:realizarBusquedaPorNombre
+        realizarBusquedaPorNombre:realizarBusquedaPorNombre,
+        can:function(){
+        $("#myCanvas").click(function(e){
+                 getPosition(e);
+            })
+        }
     }
 })();
