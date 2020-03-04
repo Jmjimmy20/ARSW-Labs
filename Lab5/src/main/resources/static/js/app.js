@@ -40,7 +40,7 @@ var hallarAutor = ( function () {
         $("#textoCanvas").text("Current blueprint: "+blueprint.name)
         var canvas = document.getElementById("myCanvas");
         var lapiz = canvas.getContext("2d");
-        //Ver como borrar el contexto actual de un Canvas//ASDASDASDASDASDSADSADSD
+
         lapiz.clearRect(0,0,canvas.width,canvas.height);
         lapiz.beginPath();
         lapiz.moveTo(blueprint.points[0].x,blueprint.points[0].y);

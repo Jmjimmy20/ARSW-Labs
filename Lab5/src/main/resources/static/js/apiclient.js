@@ -1,3 +1,4 @@
+
 var apiclient = (function(){
 
     var getBlueprintsByAuthor = (function (callback,author) {
@@ -11,7 +12,7 @@ var apiclient = (function(){
             if (!success) {
                 alert("El autor que estas colocando no existe");
             }
-        }, 0);
+        }, 60);
     })
 
     var getBlueprintsByNameAndAuthor = (function(name, author, callback) {
