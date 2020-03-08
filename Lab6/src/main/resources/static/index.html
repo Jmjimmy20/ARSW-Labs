@@ -49,10 +49,11 @@
                 <h2 id="sumaTotal">Total user points: 0</h2>
             </div>
             <div class="col">
+                <button type="button" class="btn btn-danger" onclick="hallarAutor.createBluePrint()">Create New Blueprints</button>
                 <h3 id="textoCanvas">Current Blueprint: None</h3>
                 <canvas id="myCanvas" width="500" height="500" style="border:2px solid #000000;"></canvas>
-                <button type="button" class="btn btn-danger" onclick="" style="margin:10px;">Save/Update</button>
-                <button type="button" class="btn btn-danger" onclick="" style="margin:10px;">Delete</button>
+                <button type="button" class="btn btn-danger" onclick="hallarAutor.updateBP()" style="margin:10px;">Save/Update</button>
+                <button type="button" class="btn btn-danger" onclick="hallarAutor.deleteBP()" style="margin:10px;">Delete</button>
             </div>
         </div>
     </div>
