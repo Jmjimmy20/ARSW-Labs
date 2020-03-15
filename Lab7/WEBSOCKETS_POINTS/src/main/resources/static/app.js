@@ -9,14 +9,11 @@ var app = (function () {
     
     var stompClient = null;
 
-    var addPointToCanvas = function (point) {
-
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
-        ctx.stroke();
-        stompClient.send("/topic/newpoint",{},JSON.stringify(point));
+    var addPointToCanvas = function (event) {
+        var ptTemporal = getMousePosition(event);
+        var pt=new Point(ptTemporal.x,ptTemporal.y);
+        console.info("publishing point at "+pt);
+        stompClient.send("/topic/newpoint",{},JSON.stringify(pt));
     };
     
     
@@ -40,7 +37,12 @@ var app = (function () {
         stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
             stompClient.subscribe("/topic/newpoint", function (eventbody) {
-                alert(JSON.parse(eventbody.body).x+","+JSON.parse(eventbody.body).y);
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                var puntoTMP = JSON.parse(eventbody.body);
+                ctx.arc(puntoTMP.x, puntoTMP.y, 3, 0, 2 * Math.PI);
+                ctx.stroke();
             });
 
         });
@@ -56,10 +58,14 @@ var app = (function () {
             
             //websocket connection
             connectAndSubscribe();
+
+            can.addEventListener("mousedown", addPointToCanvas, false);
+
         },
 
-        publishPoint: function(px,py){
-            var pt=new Point(px,py);
+        publishPoint: function(){
+            var ptTemporal = getMousePosition(onclick);
+            var pt=new Point(ptTemporal.x,ptTemporal.y);
             console.info("publishing point at "+pt);
             addPointToCanvas(pt);
 
