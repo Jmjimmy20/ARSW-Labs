@@ -44,6 +44,18 @@ var app = (function () {
                 ctx.arc(puntoTMP.x, puntoTMP.y, 3, 0, 2 * Math.PI);
                 ctx.stroke();
             });
+            stompClient.subscribe("/topic/newpolygon."+identificador,function (eventbody){
+                alert("Ey");
+                var canvas = document.getElementById("canvas");
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                var puntosTMP = JSON.parse(eventbody.body);
+                ctx.moveTo(puntosTMP[0].x,puntosTMP[0].y);
+                puntosTMP.map(function(element){
+                    ctx.lineTo(element.x,element.y);
+                },1)
+                ctx.stroke();
+            });
 
         });
 
