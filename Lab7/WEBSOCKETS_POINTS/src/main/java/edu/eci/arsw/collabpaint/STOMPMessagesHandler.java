@@ -31,7 +31,53 @@ public class STOMPMessagesHandler {
         }
         ptsTemp.add(pt);
         System.out.println(ptsTemp.size());
-        //Dividir en List de 4 y mandar cada uno a /topic/newpolygon.
+        List<Point> temporal = new ArrayList<>();
+        if(ptsTemp.size()%4==0){
+            for(int i = 0; i<ptsTemp.size();i++){
+                if (i%4==0){
+                    if(i!=0){
+                        msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+                    }
+                    temporal = new ArrayList<>();
+                }
+                temporal.add(ptsTemp.get(i));
+            }
+            msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+        } else if ((ptsTemp.size()-1)%4==0){
+            for(int i = 0; i<ptsTemp.size()-1;i++){
+                if (i%4==0){
+                    if(i!=0){
+                        msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+                    }
+                    temporal = new ArrayList<>();
+                }
+                temporal.add(ptsTemp.get(i));
+            }
+            msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+
+        } else if ((ptsTemp.size()-2)%4==0){
+            for(int i = 0; i<ptsTemp.size()-2;i++){
+                if (i%4==0){
+                    if(i!=0){
+                        msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+                    }
+                    temporal = new ArrayList<>();
+                }
+                temporal.add(ptsTemp.get(i));
+            }
+            msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+        } else if ((ptsTemp.size()-3)%4==0){
+            for(int i = 0; i<ptsTemp.size()-3;i++){
+                if (i%4==0){
+                    if(i!=0){
+                        msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+                    }
+                    temporal = new ArrayList<>();
+                }
+                temporal.add(ptsTemp.get(i));
+            }
+            msgt.convertAndSend("/topic/newpolygon."+numdibujo, temporal);
+        }
 
     }
 }

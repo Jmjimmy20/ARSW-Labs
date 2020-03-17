@@ -45,7 +45,6 @@ var app = (function () {
                 ctx.stroke();
             });
             stompClient.subscribe("/topic/newpolygon."+identificador,function (eventbody){
-                alert("Ey");
                 var canvas = document.getElementById("canvas");
                 var ctx = canvas.getContext("2d");
                 ctx.beginPath();
@@ -54,6 +53,8 @@ var app = (function () {
                 puntosTMP.map(function(element){
                     ctx.lineTo(element.x,element.y);
                 },1)
+
+                ctx.lineTo(puntosTMP[0].x,puntosTMP[0].y)
                 ctx.stroke();
             });
 
