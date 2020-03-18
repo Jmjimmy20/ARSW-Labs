@@ -3,7 +3,8 @@
 
 Este ejercicio se basa en la documentación oficial de SprinbBoot, para el manejo de WebSockets con STOMP.
 En este repositorio se encuentra una aplicación SpringBoot que está configurado como Broker de mensajes, de forma similar a lo mostrado en la siguiente figura:
-![](img/1.PNG)
+
+![](img/1.png)
 
 
 
