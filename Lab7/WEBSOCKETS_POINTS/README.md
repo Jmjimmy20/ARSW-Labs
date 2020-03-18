@@ -6,7 +6,14 @@ En este repositorio se encuentra una aplicación SpringBoot que está configurad
 
 ![](img/1.png)
 
+## Primera y segunda parte
 
+![](img/2.PNG)
+
+## Tercera parte
+
+![](img/3.PNG)
+![](img/4.PNG)
 
 
 ## Desarrollado con:
