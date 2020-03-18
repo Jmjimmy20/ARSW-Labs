@@ -1,30 +1,10 @@
 
-# ARSW-Lab 06
+# ARSW-Lab 07
 
-
-- Ejecución: gradle bootRun
-- URL: http://localhost:8080
-- Autores para test: author1 y author2
-
-
-#### Cargar "Author"
+Este ejercicio se basa en la documentación oficial de SprinbBoot, para el manejo de WebSockets con STOMP.
+En este repositorio se encuentra una aplicación SpringBoot que está configurado como Broker de mensajes, de forma similar a lo mostrado en la siguiente figura:
 ![](img/1.PNG)
 
-####Abrir blueprint
-
-![](img/2.PNG)
-
-####Añadir nuevos puntos a partir de clicks
-
-![](img/3.PNG)
-
-####Crear nuevo Blueprint
-
-![](img/4.PNG)
-
-####Se crea nuevo Blueprint a partir del nombre puesto
-
-![](img/5.PNG)
 
 
 
