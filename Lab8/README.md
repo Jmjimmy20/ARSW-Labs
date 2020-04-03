@@ -86,18 +86,35 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 **Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
+	R:/ En este caso nos creo 2 recursos, los cuales son la maquina virtual y una interfaz de red
 2. ¿Brevemente describa para qué sirve cada recurso?
+	R:/ - La maquina virtual es donde estan alojados todos nuestros servicios, es un "computador" que tenemos en la nube
+		- La interfaz de red permite que una máquina virtual de Azure se comunique con los recursos de Internet, Azure y locales
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
+	R:/ - La aplicación se cae ya que al cerrar la sesión SSH estamos dandole un cierre inesperado al servidor por lo cual este hace que se caiga por eso debemos usar el comando forever así tener el proceso corriendo previendo el cierre inesperado, este cierre inesperado es por el protocolo SSH que cuando se cierra la terminal que usa mata todos los procesos que se generaron desde esta.
+		- Debemos crear un inbound port rule por el WAF de Azure, ya que este funciona con reglas (como un WAF comun) sobre los puertos como abriendolos o aceptando solicitudes desde algun IP especifica en este caso como NodeJS utiliza el puerto 3000 nos toca colocar la regla de permitir el tráfico por ese puerto a todo el mundo.
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición.
     * Si hubo fallos documentelos y explique.
+    ![PostmanSizeB1](images/Test/PostmanSizeB1.jpg)
+    Como vemos con el primer tamaño de la maquina B1ls, nos saltó un error de conexión esto se debe a que el servicio se cayó a la gran saturación que tuvo, no terminó todo por ende decidí no mostrar la tabla todo los de arriba estuvieron en un tiempo promedio de ejecucción de 28s, también podemos ver que la CPU de la VM esta casi al 100% 
+	![PostmanSizeB2](images/Test/PostmanSizeB2.jpg)
+	Cuando aumentamos el tamaño de la maquina a B2ms vemos primero que nada que no hay error de conexión, termina todo satisfactoriamente y que el uso de la CPU esta alrededor del 50%, podemos ver que también el tiempo promedio de ejecucción fue de 23s lo cual bajo 5 segundos lo cual consideramos que es bastante en un PC
 7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
+    ![PostmanSizeB2](images/Test/ComparacionB1yB2.png)
+    Como vemos en la grafica B1ls es una VM muy básica pero a un muy bajo precio por lo que es una buena opción para un proyecto pequeño en cambio B2ms es una VM de más capacidad pero el precio es 15 más alto que la B1ls esta VM es perfecta para proyectos de mediano tamaño
+    
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
+    R:/ -En este caso aumentar el tamaño de la VM puede ser una buena opción ya que FibonacciApp calcula la sesión de Fibonacci secuencialmente por ende va a tener que hacer mucha cantidad de calculos y subirle a la capicidad de la maquina puede ser una solución en cambio cuando hacemos el experimento de mandarle a calcular la serie concurrentemente se demora un poco por lo que la misma maquina tiene que calcular 10 veces la serie lo cual el escalamiento horizontal sería una mejor opción en ese caso.
+        - Como vemos en las estadisticas que sacamos anteriormente el tiempo de ejecucción de cada serie se demoro 5 segundos menos lo cual en computación consideramos que es una alta diferencia ya que aqui solo calculamos la serie de 1'000.000 pero que tal que quisieramos calcular la de 20'000.000 aqui esa diferencia entre B1 y B2 se vería muchisimo más.
 9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
+    R:/ - Cuando cambiamos el tamaño de la VM esta se tiene que apagar y volver a prender (reiniciar) por ende todos los servicios que estemos ofreciendo en esa maquina se cerraran hasta que los volvamos a subir esto seria lo negativo, lo positivo es que cuando ya la volvamos a encender tendremos una maquina con mucha más capacidad.
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
+    R:/ - Si, ya que mejoramos el CPU por tanto en las consultas ya no se usan casi el 100% sino un 50% por ende el tiempo de ejecucción se mejoro por la cantidad de operaciones por segundo que podemos realizar, como vimos el tiempo se mejora 50% y también la maquina no se fuerza tanto ya que solo usamos un promedio del 50%
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
+    R:/ Al haber mayor cantidad de ejecuciones paralelas no esta mejorando ya que para eso existe el escalamiento horizontal el cual nos permitirá poder recibir un número mayor de peticiones paralelas.
 
 ### Parte 2 - Escalabilidad horizontal
 
