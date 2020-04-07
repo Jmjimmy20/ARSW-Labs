@@ -223,17 +223,37 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 ![VM3](images/Parte2/VM3Concurrente.PNG)
 ![VM4](images/Parte2/VM4Concurrente.PNG)
 
+La tasa de éxito aumento ya que tenemos más maquinas (o nodos) que puedan recibir y procesar la información, este escalamiento fue pensado para soportar una mayor cantidad de operaciones concurrentes ya que mientras un nodo esta procesando algo otro nodo esta disponible para soportar la nueva petición que llego que es lo que no sucede con el escalamiento vertical el cual sólo tenemos UNA sola maquina con mayor capacidad para soportar las peticiones concurrentes.
+
 **Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+    - Los tipos de balanceadores que ofrece Azure son internos (privados) y públicos, lo que diferencia estos esta descrito en su nombre uno es de uso público ósea que va a recibir la peticiones de cara al Internet como es el caso de este laboratorio en cambio el privado comunica VM dentro de nuestra red privada.
+    - SKU (Stock-Keeping Unit) es un identificador a un producto con diversas cantidad de formas, se usan para el almacenamiento de la nube
+    ![SKU Types](images/Parte2/skuTypes.PNG)
+    - Un balanceador necesita una IP pública si este es de tipo público ya que este estará recibiendo las peticiones las cuales redirigirá a cada VM de su pool
 * ¿Cuál es el propósito del *Backend Pool*?
+    - Son las instancias de maquinas identificadas por un IP (normalmente privadas para que sólo se puedan acceder desde el load balancer) que pertenecen al dominio del balanceador y a la cual redigirá las peticiones que le entren a estas. 
 * ¿Cuál es el propósito del *Health Probe*?
+    - Esto sirve para permitir que un balanceador de carga detecte el estado del punto de conexión back-end. Este determinará que instancias del pool recibirán nuevos flujos, también sirven para detectar errores en algún punto de la conexión con la aplicación backend.
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+    - Este define como el balanceador va a distribuir el tráfico a las maquinas virtuales, cuando se creo en este laboratorio se le dijo que iba a funcionar por el puerto 80 (por eso es que no tenemos que ponerle :3000 al URL del balanceador) y que sus puertos backend iban a ser por el puerto 3000
+    - Los tipos de sesiones persistentes son por IP de destino y por IP de la fuente, esta ultima asegura que un cliente este conectado a un servidor especifico mientras este realizandose la transacción en cambio el primero (IP de destino) permite optimizar repetidamente un contenido especifico así optimizando tiempos. 
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+    - Una red virtual es una recurso que simula una topología de una red física para comunicar las maquinas virtuales entre ellas y con el exterior (Internet)
+    - Una subnet es cuando decidimos partir esa red en varias sub redes así poder tener un mejor orden o poder cumplir reglas del negocio, esto se hace jugando con la máscara de la red (SIEMPRE una sub red tendrá una máscara mayor a la máscara de la red original)
+    - El Address Space es la que nos identifica nuestra red o sub red, es lo que llamamos en redes como el identificador de red el cual nos marca el comienzo de nuestra red (por convención se usa la primera IP de la red)
+    - El Address Range es el rango o lista de IP que podemos asignar en nuestra red o subred, esto se puede utilizar también en el protoclo DHCP para asignar IP dinamicas
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
+    - Las zonas de disponibilidad son ubicaciones separadas físicamente dentro de una región de Azure. Cada zona de disponibilidad consta de uno o varios centros de datos equipados con alimentación, refrigeración y redes independientes. Las zonas de disponibilidad permiten a los clientes ejecutar aplicaciones críticas con alta disponibilidad y replicación con baja latencia.
+    - Seleccionamos 3 diferentes zonas para que nuestras VM trabajen en diferentes espacios físicos así demostrar la potencia de la nube
+    - Significa que la maquina que le pertenece esa IP podrá estar en una zona de disponibilidad diferente a las otras y se podrán comunicar sin problema alguno esto es en pro del criterio de calidad de resilencia ya que en caso de una emergencía las maquinas estaran en zonas de disponibilidad diferentes.
 * ¿Cuál es el propósito del *Network Security Group*?
+    - El proposito de esto es poder asignar reglas de entrada y salida de las maquinas virtuales, así tener un nivel de seguridad mayor ya que tendriamos los puertos abiertos solo para lo que necesitemos y no expongamos de forma negativa nuestra maquina a terceros. 
 * Informe de newman 1 (Punto 2)
+    - Fueron presentados más arriba
 * Presente el Diagrama de Despliegue de la solución.
+![Diagrama de Despliegue](images/Parte2/DiagramaDeDespliegue.PNG)
 
 
 
