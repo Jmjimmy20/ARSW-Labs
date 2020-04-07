@@ -86,10 +86,15 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 **Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
-	R:/ En este caso nos creo 2 recursos, los cuales son la maquina virtual y una interfaz de red
+	R:/ En este caso nos creo 7 recursos, los cuales son la red virtual, cuenta de almacenamiento, maquina virtual, dirección IP pública, grupo de seguridad de red, interfaz de red y disco
 2. ¿Brevemente describa para qué sirve cada recurso?
 	R:/ - La maquina virtual es donde estan alojados todos nuestros servicios, es un "computador" que tenemos en la nube
 		- La interfaz de red permite que una máquina virtual de Azure se comunique con los recursos de Internet, Azure y locales
+        - La red virtual es una red que simula una red física y es una combinación de recursos de red de hardware y software
+        - La cuenta de almacenamiento proporciona un espacio de nombres único para los datos de Azure Storage que es accesible desde cualquier lugar del mundo a través de HTTP o HTTPS. Los datos de la cuenta de Azure Storage son duraderos y altamente disponibles, seguros y escalables a gran escala.
+        - La dirección IP pública es un identificador de nuestra maquina (o nuestra red) ante el Internet o exterior de la red.
+        - Grupo de seguridad de red contiene reglas de seguridad que permiten o deniegan el tráfico de red entrante o el tráfico de red saliente de varios tipos de recursos de Azure (Este es el que modificamos para abrir el puerto 3000).
+        - El Disco sirve como dispositivo de hardware de memoria no volátil que almacena permanentemente datos en una computadora.
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
 	R:/ - La aplicación se cae ya que al cerrar la sesión SSH estamos dandole un cierre inesperado al servidor por lo cual este hace que se caiga por eso debemos usar el comando forever así tener el proceso corriendo previendo el cierre inesperado, este cierre inesperado es por el protocolo SSH que cuando se cierra la terminal que usa mata todos los procesos que se generaron desde esta.
 		- Debemos crear un inbound port rule por el WAF de Azure, ya que este funciona con reglas (como un WAF comun) sobre los puertos como abriendolos o aceptando solicitudes desde algun IP especifica en este caso como NodeJS utiliza el puerto 3000 nos toca colocar la regla de permitir el tráfico por ese puerto a todo el mundo.
@@ -190,6 +195,18 @@ http://52.155.223.248/fibonacci/1
 ```
 
 2. Realice las pruebas de carga con `newman` que se realizaron en la parte 1 y haga un informe comparativo donde contraste: tiempos de respuesta, cantidad de peticiones respondidas con éxito, costos de las 2 infraestrucruras, es decir, la que desarrollamos con balanceo de carga horizontal y la que se hizo con una maquina virtual escalada.
+* Sin balanceador
+
+    - Acá otra prueba donde se ve claramente que tiro un error de conexión y es porque como es solo una maquina virtual sin escalar y tiró error de conexión
+    ![](images\Test\PostmanSizeB1.png)
+    - Acá es otra prueba donde podemos ver la petición de la maquina escalada
+    ![](images\Test\PostmanSizeB2.png)
+
+* Con balanceador
+    - Una sola petición
+    ![](images\Parte2\ComparaciónBalanceador.png)
+    - Petición concurrente
+    ![](images\Parte2\4ConsultasConcurrentesLoadBalancer.png)
 
 3. Agregue una 4 maquina virtual y realice las pruebas de newman, pero esta vez no lance 2 peticiones en paralelo, sino que incrementelo a 4. Haga un informe donde presente el comportamiento de la CPU de las 4 VM y explique porque la tasa de éxito de las peticiones aumento con este estilo de escalabilidad.
 
@@ -199,6 +216,12 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10 &
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
 ```
+
+![](images\Parte2\4ConsultasConcurrentesLoadBalancer.png)
+![VM1](images\Parte2\VM1Concurrente.png)
+![VM2](images\Parte2\VM2Concurrente.png)
+![VM3](images\Parte2\VM3Concurrente.png)
+![VM4](images\Parte2\VM4Concurrente.png)
 
 **Preguntas**
 
