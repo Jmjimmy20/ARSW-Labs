@@ -198,15 +198,15 @@ http://52.155.223.248/fibonacci/1
 * Sin balanceador
 
     - Acá otra prueba donde se ve claramente que tiro un error de conexión y es porque como es solo una maquina virtual sin escalar y tiró error de conexión
-    ![](images\Test\PostmanSizeB1.png)
+    ![PostmanSizeB1](images/Test/PostmanSizeB1.jpg)
     - Acá es otra prueba donde podemos ver la petición de la maquina escalada
-    ![](images\Test\PostmanSizeB2.png)
+    ![PostmanSizeB2](images/Test/PostmanSizeB2.jpg)
 
 * Con balanceador
     - Una sola petición
-    ![](images\Parte2\ComparaciónBalanceador.png)
+    ![](images\Parte2\ComparaciónBalanceador.PNG)
     - Petición concurrente
-    ![](images\Parte2\4ConsultasConcurrentesLoadBalancer.png)
+    ![](images\Parte2\4ConsultasConcurrentesLoadBalancer.PNG)
 
 3. Agregue una 4 maquina virtual y realice las pruebas de newman, pero esta vez no lance 2 peticiones en paralelo, sino que incrementelo a 4. Haga un informe donde presente el comportamiento de la CPU de las 4 VM y explique porque la tasa de éxito de las peticiones aumento con este estilo de escalabilidad.
 
@@ -217,11 +217,11 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALANCING_AZURE].postman_environment.json -n 10
 ```
 
-![](images\Parte2\4ConsultasConcurrentesLoadBalancer.png)
-![VM1](images\Parte2\VM1Concurrente.png)
-![VM2](images\Parte2\VM2Concurrente.png)
-![VM3](images\Parte2\VM3Concurrente.png)
-![VM4](images\Parte2\VM4Concurrente.png)
+![](images\Parte2\4ConsultasConcurrentesLoadBalancer.PNG)
+![VM1](images\Parte2\VM1Concurrente.PNG)
+![VM2](images\Parte2\VM2Concurrente.PNG)
+![VM3](images\Parte2\VM3Concurrente.PNG)
+![VM4](images\Parte2\VM4Concurrente.PNG)
 
 **Preguntas**
 
