@@ -168,18 +168,22 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 **Preguntas**
 
 1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
-	R:/ En este caso nos creo 7 recursos, los cuales son la red virtual, cuenta de almacenamiento, maquina virtual, dirección IP pública, grupo de seguridad de red, interfaz de red y disco
+
+R:/ En este caso nos creo 7 recursos, los cuales son la red virtual, cuenta de almacenamiento, maquina virtual, dirección IP pública, grupo de seguridad de red, interfaz de red y disco
 2. ¿Brevemente describa para qué sirve cada recurso?
-	R:/ - La maquina virtual es donde estan alojados todos nuestros servicios, es un "computador" que tenemos en la nube
-		- La interfaz de red permite que una máquina virtual de Azure se comunique con los recursos de Internet, Azure y locales
+
+R:/ - La maquina virtual es donde estan alojados todos nuestros servicios, es un "computador" que tenemos en la nube
+	- La interfaz de red permite que una máquina virtual de Azure se comunique con los recursos de Internet, Azure y locales
         - La red virtual es una red que simula una red física y es una combinación de recursos de red de hardware y software
         - La cuenta de almacenamiento proporciona un espacio de nombres único para los datos de Azure Storage que es accesible desde cualquier lugar del mundo a través de HTTP o HTTPS. Los datos de la cuenta de Azure Storage son duraderos y altamente disponibles, seguros y escalables a gran escala.
         - La dirección IP pública es un identificador de nuestra maquina (o nuestra red) ante el Internet o exterior de la red.
         - Grupo de seguridad de red contiene reglas de seguridad que permiten o deniegan el tráfico de red entrante o el tráfico de red saliente de varios tipos de recursos de Azure (Este es el que modificamos para abrir el puerto 3000).
         - El Disco sirve como dispositivo de hardware de memoria no volátil que almacena permanentemente datos en una computadora.
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
-	R:/ - La aplicación se cae ya que al cerrar la sesión SSH estamos dandole un cierre inesperado al servidor por lo cual este hace que se caiga por eso debemos usar el comando forever así tener el proceso corriendo previendo el cierre inesperado, este cierre inesperado es por el protocolo SSH que cuando se cierra la terminal que usa mata todos los procesos que se generaron desde esta.
-		- Debemos crear un inbound port rule por el WAF de Azure, ya que este funciona con reglas (como un WAF comun) sobre los puertos como abriendolos o aceptando solicitudes desde algun IP especifica en este caso como NodeJS utiliza el puerto 3000 nos toca colocar la regla de permitir el tráfico por ese puerto a todo el mundo.
+
+R:/ - La aplicación se cae ya que al cerrar la sesión SSH estamos dandole un cierre inesperado al servidor por lo cual este hace que se caiga por eso debemos usar el comando forever así tener el proceso corriendo previendo el cierre inesperado, este cierre inesperado es por el protocolo SSH que cuando se cierra la terminal que usa mata todos los procesos que se generaron desde esta.
+	- Debemos crear un inbound port rule por el WAF de Azure, ya que este funciona con reglas (como un WAF comun) sobre los puertos como abriendolos o aceptando solicitudes desde algun IP especifica en este caso como NodeJS utiliza el puerto 3000 nos toca colocar la regla de permitir el tráfico por ese puerto a todo el mundo.
+		
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
@@ -194,14 +198,20 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     Como vemos en la grafica B1ls es una VM muy básica pero a un muy bajo precio por lo que es una buena opción para un proyecto pequeño en cambio B2ms es una VM de más capacidad pero el precio es 15 más alto que la B1ls esta VM es perfecta para proyectos de mediano tamaño
     
 8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
-    R:/ -En este caso aumentar el tamaño de la VM puede ser una buena opción ya que FibonacciApp calcula la sesión de Fibonacci secuencialmente por ende va a tener que hacer mucha cantidad de calculos y subirle a la capicidad de la maquina puede ser una solución en cambio cuando hacemos el experimento de mandarle a calcular la serie concurrentemente se demora un poco por lo que la misma maquina tiene que calcular 10 veces la serie lo cual el escalamiento horizontal sería una mejor opción en ese caso.
+    
+R:/ -En este caso aumentar el tamaño de la VM puede ser una buena opción ya que FibonacciApp calcula la sesión de Fibonacci secuencialmente por ende va a tener que hacer mucha cantidad de calculos y subirle a la capicidad de la maquina puede ser una solución en cambio cuando hacemos el experimento de mandarle a calcular la serie concurrentemente se demora un poco por lo que la misma maquina tiene que calcular 10 veces la serie lo cual el escalamiento horizontal sería una mejor opción en ese caso.
         - Como vemos en las estadisticas que sacamos anteriormente el tiempo de ejecucción de cada serie se demoro 5 segundos menos lo cual en computación consideramos que es una alta diferencia ya que aqui solo calculamos la serie de 1'000.000 pero que tal que quisieramos calcular la de 20'000.000 aqui esa diferencia entre B1 y B2 se vería muchisimo más.
+	
 9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
-    R:/ - Cuando cambiamos el tamaño de la VM esta se tiene que apagar y volver a prender (reiniciar) por ende todos los servicios que estemos ofreciendo en esa maquina se cerraran hasta que los volvamos a subir esto seria lo negativo, lo positivo es que cuando ya la volvamos a encender tendremos una maquina con mucha más capacidad.
+
+R:/ - Cuando cambiamos el tamaño de la VM esta se tiene que apagar y volver a prender (reiniciar) por ende todos los servicios que estemos ofreciendo en esa maquina se cerraran hasta que los volvamos a subir esto seria lo negativo, lo positivo es que cuando ya la volvamos a encender tendremos una maquina con mucha más capacidad.
 10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
-    R:/ - Si, ya que mejoramos el CPU por tanto en las consultas ya no se usan casi el 100% sino un 50% por ende el tiempo de ejecucción se mejoro por la cantidad de operaciones por segundo que podemos realizar, como vimos el tiempo se mejora 50% y también la maquina no se fuerza tanto ya que solo usamos un promedio del 50%
+
+R:/ - Si, ya que mejoramos el CPU por tanto en las consultas ya no se usan casi el 100% sino un 50% por ende el tiempo de ejecucción se mejoro por la cantidad de operaciones por segundo que podemos realizar, como vimos el tiempo se mejora 50% y también la maquina no se fuerza tanto ya que solo usamos un promedio del 50%
+
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
-    R:/ Al haber mayor cantidad de ejecuciones paralelas no esta mejorando ya que para eso existe el escalamiento horizontal el cual nos permitirá poder recibir un número mayor de peticiones paralelas.
+
+R:/ Al haber mayor cantidad de ejecuciones paralelas no esta mejorando ya que para eso existe el escalamiento horizontal el cual nos permitirá poder recibir un número mayor de peticiones paralelas.
 
 ### Parte 2 - Escalabilidad horizontal
 
@@ -310,33 +320,65 @@ La tasa de éxito aumento ya que tenemos más maquinas (o nodos) que puedan reci
 **Preguntas**
 
 * ¿Cuáles son los tipos de balanceadores de carga en Azure y en qué se diferencian?, ¿Qué es SKU, qué tipos hay y en qué se diferencian?, ¿Por qué el balanceador de carga necesita una IP pública?
+
     - Los tipos de balanceadores que ofrece Azure son internos (privados) y públicos, lo que diferencia estos esta descrito en su nombre uno es de uso público ósea que va a recibir la peticiones de cara al Internet como es el caso de este laboratorio en cambio el privado comunica VM dentro de nuestra red privada.
+    
     - SKU (Stock-Keeping Unit) es un identificador a un producto con diversas cantidad de formas, se usan para el almacenamiento de la nube
+    
     ![SKU Types](images/Parte2/skuTypes.PNG)
+    
     - Un balanceador necesita una IP pública si este es de tipo público ya que este estará recibiendo las peticiones las cuales redirigirá a cada VM de su pool
+    
 * ¿Cuál es el propósito del *Backend Pool*?
+
     - Son las instancias de maquinas identificadas por un IP (normalmente privadas para que sólo se puedan acceder desde el load balancer) que pertenecen al dominio del balanceador y a la cual redigirá las peticiones que le entren a estas. 
+    
 * ¿Cuál es el propósito del *Health Probe*?
+
     - Esto sirve para permitir que un balanceador de carga detecte el estado del punto de conexión back-end. Este determinará que instancias del pool recibirán nuevos flujos, también sirven para detectar errores en algún punto de la conexión con la aplicación backend.
+    
 * ¿Cuál es el propósito de la *Load Balancing Rule*? ¿Qué tipos de sesión persistente existen, por qué esto es importante y cómo puede afectar la escalabilidad del sistema?.
+
     - Este define como el balanceador va a distribuir el tráfico a las maquinas virtuales, cuando se creo en este laboratorio se le dijo que iba a funcionar por el puerto 80 (por eso es que no tenemos que ponerle :3000 al URL del balanceador) y que sus puertos backend iban a ser por el puerto 3000
+    
     - Los tipos de sesiones persistentes son por IP de destino y por IP de la fuente, esta ultima asegura que un cliente este conectado a un servidor especifico mientras este realizandose la transacción en cambio el primero (IP de destino) permite optimizar repetidamente un contenido especifico así optimizando tiempos. 
+    
 * ¿Qué es una *Virtual Network*? ¿Qué es una *Subnet*? ¿Para qué sirven los *address space* y *address range*?
+
     - Una red virtual es una recurso que simula una topología de una red física para comunicar las maquinas virtuales entre ellas y con el exterior (Internet)
+    
     - Una subnet es cuando decidimos partir esa red en varias sub redes así poder tener un mejor orden o poder cumplir reglas del negocio, esto se hace jugando con la máscara de la red (SIEMPRE una sub red tendrá una máscara mayor a la máscara de la red original)
+    
     - El Address Space es la que nos identifica nuestra red o sub red, es lo que llamamos en redes como el identificador de red el cual nos marca el comienzo de nuestra red (por convención se usa la primera IP de la red)
+    
     - El Address Range es el rango o lista de IP que podemos asignar en nuestra red o subred, esto se puede utilizar también en el protoclo DHCP para asignar IP dinamicas
+    
 * ¿Qué son las *Availability Zone* y por qué seleccionamos 3 diferentes zonas?. ¿Qué significa que una IP sea *zone-redundant*?
+
     - Las zonas de disponibilidad son ubicaciones separadas físicamente dentro de una región de Azure. Cada zona de disponibilidad consta de uno o varios centros de datos equipados con alimentación, refrigeración y redes independientes. Las zonas de disponibilidad permiten a los clientes ejecutar aplicaciones críticas con alta disponibilidad y replicación con baja latencia.
+    
     - Seleccionamos 3 diferentes zonas para que nuestras VM trabajen en diferentes espacios físicos así demostrar la potencia de la nube
+    
     - Significa que la maquina que le pertenece esa IP podrá estar en una zona de disponibilidad diferente a las otras y se podrán comunicar sin problema alguno esto es en pro del criterio de calidad de resilencia ya que en caso de una emergencía las maquinas estaran en zonas de disponibilidad diferentes.
+    
 * ¿Cuál es el propósito del *Network Security Group*?
+
     - El proposito de esto es poder asignar reglas de entrada y salida de las maquinas virtuales, así tener un nivel de seguridad mayor ya que tendriamos los puertos abiertos solo para lo que necesitemos y no expongamos de forma negativa nuestra maquina a terceros. 
+    
 * Informe de newman 1 (Punto 2)
+
     - Fueron presentados más arriba
+    
 * Presente el Diagrama de Despliegue de la solución.
+
 ![Diagrama de Despliegue](images/Parte2/DiagramaDeDespliegue.PNG)
 
+
+
+## Autores:
+
+* **Orlando Antonio Gelves Kerguelen**  [orlandoagk](https://github.com/orlandoagk)
+* **Jimmy Andres Moya Suarez**  [Jmjimmy20](https://github.com/Jmjimmy20)
 
 
 
