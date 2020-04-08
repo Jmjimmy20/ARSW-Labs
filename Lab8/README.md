@@ -120,6 +120,48 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 ![Imágen 3](images/part1/part1-vm-resize.png)
 
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
+
+* 1000000
+    
+    ![Imágen 1](images/Size%20B2ms/Test1.PNG)
+    ![Imágen 1](images/Size%20B2ms/Test1R.PNG)
+    
+    * 1010000
+    
+    ![Imágen 1](images/Size%20B2ms/Test2.PNG)
+    
+    * 1020000
+    
+    ![Imágen 1](images/Size%20B2ms/Test3.PNG)
+    
+    * 1030000
+    
+    ![Imágen 1](images/Size%20B2ms/Test4.PNG)
+    
+    * 1040000
+    
+    ![Imágen 1](images/Size%20B2ms/Test5.PNG)
+    
+    * 1050000
+    
+    ![Imágen 1](images/Size%20B2ms/Test6.PNG)
+    
+    * 1060000
+    
+    ![Imágen 1](images/Size%20B2ms/Test7.PNG)
+    
+    * 1070000
+    
+    ![Imágen 1](images/Size%20B2ms/Test8.PNG)
+    
+    * 1080000
+    
+    ![Imágen 1](images/Size%20B2ms/Test9.PNG)
+    
+    * 1090000    
+    
+    ![Imágen 1](images/Size%20B2ms/Test10.PNG)
+
 12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
 
