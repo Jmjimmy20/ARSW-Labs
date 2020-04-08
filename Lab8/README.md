@@ -50,15 +50,55 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
     * 1000000
+    
+    ![Imágen 1](images/Test/Test1.PNG)
+    ![Imágen 1](images/Test/Test1R.PNG)
+    
     * 1010000
+    
+    ![Imágen 1](images/Test/Test2.PNG)
+    ![Imágen 1](images/Test/Test2R.PNG)
+    
     * 1020000
+    
+    ![Imágen 1](images/Test/Test3.PNG)
+    ![Imágen 1](images/Test/Test3R.PNG)
+    
     * 1030000
+    
+    ![Imágen 1](images/Test/Test4.PNG)
+    ![Imágen 1](images/Test/Test4R.PNG)
+    
     * 1040000
+    
+    ![Imágen 1](images/Test/Test5.PNG)
+    ![Imágen 1](images/Test/Test5R.PNG)
+    
     * 1050000
+    
+    ![Imágen 1](images/Test/Test6.PNG)
+    ![Imágen 1](images/Test/Test6R.PNG)
+    
     * 1060000
+    
+    ![Imágen 1](images/Test/Test7.PNG)
+    ![Imágen 1](images/Test/Test7R.PNG)
+    
     * 1070000
+    
+    ![Imágen 1](images/Test/Test8.PNG)
+    ![Imágen 1](images/Test/Test8R.PNG)
+    
     * 1080000
+    
+    ![Imágen 1](images/Test/Test9.PNG)
+    ![Imágen 1](images/Test/Test9R.PNG)
+    
     * 1090000    
+    
+    ![Imágen 1](images/Test/Test10.PNG)
+    ![Imágen 1](images/Test/Test10R.PNG)
+    
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
