@@ -42,10 +42,18 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 **Preguntas**
 
 * ¿Qué es un Azure Function?
+    - Es una solución para ejecutar fácilmente pequeños fragmentos de código o “funciones” en la nube.
 * ¿Qué es serverless?
+    - Serverless o informática sin servidor se refiere a un modelo de cloud computing en el que los desarrolladores de aplicaciones no tienen que implementar servidores ni gestionar la escalabilidad de sus aplicaciones. En su lugar, el proveedor de nube abstrae esas tareas rutinarias para que los desarrolladores puedan crear códigos para la producción más rápido que en los modelos tradicionales.
 * ¿Qué es el runtime y que implica seleccionarlo al momento de crear el Function App?
+    - Runtime: Runtime es el tiempo de ejecucion una tarea, puede ser un programa completo o una función.
+    - 
 * ¿Por qué es necesario crear un Storage Account de la mano de un Function App?
+    - 
 * ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
+    - 
 * ¿Por qué la memoization falla o no funciona de forma correcta?
+    - 
 * ¿Cómo funciona el sistema de facturación de las Function App?
+    - 
 * Informe
