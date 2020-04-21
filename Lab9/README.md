@@ -37,7 +37,25 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 5. Modifique la coleción de POSTMAN con NEWMAN de tal forma que pueda enviar 10 peticiones concurrentes. Verifique los resultados y presente un informe.
 
+Pondremos el informe más abajo en la sección de preguntas (ultimo numeral)
+
+
 6. Cree una nueva Function que resuleva el problema de Fibonacci pero esta vez utilice un enfoque recursivo con memoization. Pruebe la función varias veces, después no haga nada por al menos 5 minutos. Pruebe la función de nuevo con los valores anteriores. ¿Cuál es el comportamiento?.
+
+Realizamos el experimento correspondiente de forma recursiva usando memorización pero el programa se estalla con el caso 100.000 y nos da una excepción RangeError: Maximum call stack size exceeded por lo cual adjuntaremos el código pero optaremos por usar una solución iterativa con memorización.
+Adjunto el código para la prueba recursiva con memorización.
+![](images/Informe/RecursionConMemorizacion.PNG)
+Error con recursión usando el valor de 1'000.000
+![](images/Informe/RecursionEstallada.PNG)
+
+Como vemos en la solución recursiva con memorización nos da un error el cual nos dice que el stack de llamados se excedió, pero básicamente siguiendo las instrucciones del ejercicio con esta implementación siempre funciona igual con casos bajos lo que si podemos recalcar es el tiempo de ejecucción ya que la memorización permite que sea bastante eficiente con respecto al tiempo pero por la restricción con respecto al stack de llamados preferimos cambiar de solución como planteamos anteriormente.
+
+Adjunto el código para prueba de la memorización iterativa
+![](images/Informe/CodigoConMemorizacion.PNG)
+
+Al probar varias veces la primera vez se demoro calculando 100.000 (no pudimos probar con 1'000.000 ya que el código se demora mucho en ejecutarse así que decidimos bajarlo), pero cuando empezamos a usar valores menores a 100.000 la función retorna casi enseguida el resultado esto fue probado con los siguientes valores 999.999, 900.000, 800.000 y 7500.
+
+Siguiendo con las instrucciones dejamos de hacer peticiones por más de 5 minutos y cuando volvimos a realizar la petición con 100.000 esta se demoro y tuvo que calcularse de nuevo, por ende podemos decir que el caché de la función se limpia aproximadamente cada 5 minutos, despues de probar con ese 100.000 volvemos al comportamiento nuevamente de calcular numeros menores casi enseguida.
 
 **Preguntas**
 
@@ -53,7 +71,24 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 * ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
     - 
 * ¿Por qué la memoization falla o no funciona de forma correcta?
-    - 
+	- La impelemtanción recursiva con memorización fallo debido a que la cantidad de procesos que estamos realizando es muy alta, la memorización colabora a reducir algunos de estos pero aun así se siguen necesitando muchos procesos por lo cual no es una solución óptima para este ejercicio. 
+    - La implementación iterativa usando memorización no fallo, solamente se borra cuando no se ejecuta la función dentro de 5 minutos.
 * ¿Cómo funciona el sistema de facturación de las Function App?
     - 
 * Informe
+
+Ejecutamos newman con una nueva colección la cual se llama Lab9 y contiene una consulta a la API de la función la cual usa el metodo POST y envía en el cuerpo de la data una variable llamada nth con valor de 1'000.000, lo que haremos para que funcione concurrentemente es ejecutarla 10 veces en una consola diferente cada una, mantremos un número de 10 iteraciones por petición para así poder sacar un número promedio más acertado.
+![](images/Informe/AntesDeIniciar.PNG)
+
+Como vemos en la imagen de abajo ya estamos ejecutando los comandos y hasta ahora no hemos visto ningún problema en los casos por ende por ahora podemos deducir que esta opción de Azure Functions nos cumple con la premisa de no tener que preocuparnos por la infraestructura, lo que si estamos viendo hasta ahora en comparación con la solución del laboratorio pasado es que los tiempos se elevaron casi 3 veces pero no concluimos nada hasta tener el resultado de las tablas.
+
+![](images/Informe/EnEjecucion.PNG)
+
+Después de que terminaron tenemos las 10 tablas que nos dió newman cada una por cada consulta (para mayor entendimiento estas fueran enumeradas), ahora procedemos a ver los datos de las tablas para poder concluir algo, estas tablas las adjuntaré enseguida.
+![](images/Informe/TablasParte1.PNG)
+![](images/Informe/TablasParte2.PNG)
+![](images/Informe/TablasParte3.PNG)
+
+Como vemos tenemos un tiempo promedio de respuesta 2:30 minutos lo cual es 4 veces más alto que el tiempo de respuesta promedio de la solución del anterior laboratorio teniendo un minimo tiempo promedio de 1:25 minutos y un tiempo máximo de casi 4 minutos. Respecto a los tiempos vemos que esta no es una solución muy optima para este problema de Fibonacci pero cabe recalcar que el despliegue de la función es MUY rapido casi enseguida lo que no pasaba con las maquinas virtuales del anterior laboratiorio que tenian un inicio promedio de 40 segundos, también cabe recalcar en estas pruebas que ninguna iteración de ninguna petición fallo lo cual no sucedió con la primera prueba del laboratorio pasado (la que nos tocó escalar verticalmente).
+
+Podemos concluir que esta solución de funciones puede ser muy eficente para operaciones que no necesiten mucho procesamiento ya que con respecto a maquinas virtuales se quedan muy atras en caunto a tiempo de ejecucción, además de que el rápido despliegue de estas mismas nos permitirá probrar mucho más rápido funciones de nuestros algoritmos.

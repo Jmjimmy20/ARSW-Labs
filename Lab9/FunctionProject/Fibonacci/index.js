@@ -6,7 +6,7 @@ module.exports = async function (context, req) {
     let nth_1 = bigInt.one;
     let nth_2 = bigInt.zero;
     let answer = bigInt.zero;
-
+    memorizacion = {}
     if (nth < 0)
         throw 'must be greater than 0'
     else if (nth === 0)
@@ -16,12 +16,14 @@ module.exports = async function (context, req) {
     else {
         for (var i = 0; i < nth - 1; i++) {
             answer = nth_2.add(nth_1)
+            memorizacion[i+2]=answer
             nth_2 = nth_1
             nth_1 = answer
         }
     }
+    let answerDos = memorizacion[nth]; 
 
     context.res = {
-        body: answer.toString()
+        body: answerDos.toString()
     };
 }
