@@ -60,12 +60,14 @@ Siguiendo con las instrucciones dejamos de hacer peticiones por más de 5 minuto
 **Preguntas**
 
 * ¿Qué es un Azure Function?
-    - Es una solución para ejecutar fácilmente pequeños fragmentos de código o “funciones” en la nube.
+    - Es una solución para ejecutar fácilmente pequeños fragmentos de código o “funciones” en la nube sin preocuparse de la infraestructura de la aplicación; la infraestructura dn la nube proporciona los servidores necesarios para un buen funcionamiento a escala.
 * ¿Qué es serverless?
     - Serverless o informática sin servidor se refiere a un modelo de cloud computing en el que los desarrolladores de aplicaciones no tienen que implementar servidores ni gestionar la escalabilidad de sus aplicaciones. En su lugar, el proveedor de nube abstrae esas tareas rutinarias para que los desarrolladores puedan crear códigos para la producción más rápido que en los modelos tradicionales.
 * ¿Qué es el runtime y que implica seleccionarlo al momento de crear el Function App?
     - Runtime: Runtime es el tiempo de ejecucion una tarea, puede ser un programa completo o una función.
-    - 
+    - En Azure functions el runtime permite experimentar estas sin necesidad de comprometerse con la nube, así mismos,  el codigo o funciones aue crees estara disponible en la nube.
+    - Esto implica que que una parte de la aplicacion se correra en maquinas locales, esta caracteristica nos mermitenejecutar procesos por lotes en horas especificas entre otras cosas.
+
 * ¿Por qué es necesario crear un Storage Account de la mano de un Function App?
     - 
 * ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
