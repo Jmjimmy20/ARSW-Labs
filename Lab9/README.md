@@ -59,28 +59,64 @@ Siguiendo con las instrucciones dejamos de hacer peticiones por más de 5 minuto
 
 **Preguntas**
 
-* ¿Qué es un Azure Function?
+* **¿Qué es un Azure Function?**
     - Es una solución para ejecutar fácilmente pequeños fragmentos de código o “funciones” en la nube sin preocuparse de la infraestructura de la aplicación; la infraestructura dn la nube proporciona los servidores necesarios para un buen funcionamiento a escala.
-* ¿Qué es serverless?
+* **¿Qué es serverless?**
     - Serverless o informática sin servidor se refiere a un modelo de cloud computing en el que los desarrolladores de aplicaciones no tienen que implementar servidores ni gestionar la escalabilidad de sus aplicaciones. En su lugar, el proveedor de nube abstrae esas tareas rutinarias para que los desarrolladores puedan crear códigos para la producción más rápido que en los modelos tradicionales.
-* ¿Qué es el runtime y que implica seleccionarlo al momento de crear el Function App?
+* **¿Qué es el runtime y que implica seleccionarlo al momento de crear el Function App?**
     - Runtime: Runtime es el tiempo de ejecucion una tarea, puede ser un programa completo o una función.
     - En Azure functions el runtime permite experimentar estas sin necesidad de comprometerse con la nube, así mismos,  el codigo o funciones aue crees estara disponible en la nube.
     - Esto implica que que una parte de la aplicacion se correra en maquinas locales, esta caracteristica nos mermitenejecutar procesos por lotes en horas especificas entre otras cosas.
 
-* ¿Por qué es necesario crear un Storage Account de la mano de un Function App?
+* **¿Por qué es necesario crear un Storage Account de la mano de un Function App?**
     -   La cuenta de almacenamiento proporciona un espacio de nombres único para sus datos de Azure Storage al que se puede acceder desde cualquier lugar del mundo a través de HTTP o HTTPS, esto nos otorga mas seguridad en los proyectos o desarrollos, asi mismo esta cuenta contiene todos los objetos de datos de Azure Storage como blobs, archivos, entre otros.
 
-* ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
-    - Azure nos ofrece 2 opciones grandes, la primera es adquiriendo planes, esotos de dividen en free, shared, basic, standar, premium e isolate; a continuación vemos la imagen de los planes.
+* **¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.**
+    Azure nos ofrece dos tipos de planes con los cuales dependiendo de nuestras necesidades podremos elegir el que mas nos convenga, estos planes son:
+   1. Pagos directos por consumo, este tipo cuenta con dos planes:
+     - Plan por consumo: Este plan nos permite el uso de todas las aplicaciones de funciones que están en esta suscripción, este plan solo realizara cobros sobre el numero de eventos que se realicen en el servicio y así mismo por su duración. Este plan nos regala al mes 400,000 GB-s de consumo y 1 millón de ejecuciones.
+     
+	- Ventajas:
+		- Solo se realizan pagos cuando se están ejecutando funciones
+		- Tiene soporte de distintas aplicaciones sobre el mismo plan
+		- Las funciones cuentan con un tiempo de espera el cual se puede configurar, este nos permite que no se espere de manera indefinida por la ejecución de una de estas.
+	- Desventajas:
+		- Las instancias cuentan con poca memoria.
+		- Solo se nos da 1 GB de almacenamiento.
+       
+     - Plan de cobro premium: Este plan es una mejora del servicio ya que cuenta con mejoras en el rendimiento, y cambia la forma en que se esta facturando con este plan, ya que, se cobra por segundos que dependen del número de vCPU-s y de GB-s que se estén consumiendo.
+
+	- Ventajas:
+		- Las instancias pueden tener distintas cantidades de núcleos (1,2,4)
+		- Las instancias se pueden agregar o quitar a de manera dinámica
+		- Cuentan con conexión a una red virtual.
+	- Desventajas:
+		- El cobro que se realiza mensualmente es independiente al numero de ejecuciones que se estén realizando.
+		
+Estos dos planes cuentan con diferencia en la forma en que se realizan los cobros, ya que el plan de consumo cobra por el número de funciones que se tienen y su duración, por su parte el premium cobra por los recursos.
+
+   2. Adquisición de planes: 
+Estos son planes los cuales cuentan con distintas características especificas dependiendo del tipo que se tengan. Los tipos de planes son:
+
+   - Free: Este plan cuenta con capacidad de tener 10 aplicaciones ya sean para web, móviles o API, y nos da un espacio de disco de 1 GB.
+   - Shared: Este plan cuenta con capacidad de tener hasta 100 aplicaciones ya sean para web, móviles o API, nos da un espacio de disco de 1 GB y cuenta con soporte para un dominio personalizado. Este tiene un costo de $0.013/hora
+   - Basic: Este plan cuenta con capacidad ilimitada para aplicaciones ya sean para web, móviles o API, nos da un espacio de disco de 10 GB y cuenta con soporte para un dominio personalizado. Este tiene un costo de $0.075/hora
+	
+Estos tres planes están hechos principalmente para aplicaciones que se encuentren en estaba de desarrollo y de pruebas, por eso sus recursos son limitados y con un bajo costo.
+
+   - Standar: Este plan cuenta con capacidad ilimitada para aplicaciones ya sean para web, móviles o API, nos da un espacio de disco de 50 GB, cuenta con soporte para un dominio personalizado, cuenta con soporte para el auto escalamiento y la capacidad de conectarse por una VPN hibrida. Este tiene un costo de $0.10/hora.
+   - Premium: Este plan cuenta con capacidad ilimitada para aplicaciones ya sean para web, móviles o API, nos da un espacio de disco de 250 GB, cuenta con soporte para un dominio personalizado, cuenta con soporte para el auto escalamiento y la capacidad de conectarse por una VPN hibrida. Este tiene un costo de $0.20/hora.
+   - isolated: Este plan cuenta con capacidad ilimitada para aplicaciones ya sean para web, móviles o API, nos da un espacio de disco de 1 TB, cuenta con soporte para un dominio personalizado, cuenta con soporte para el auto escalamiento y la capacidad de conectarse por una VPN hibrida. Este tiene un costo de $0.40/hora.
+	
     
-    
-    
-* ¿Por qué la memoization falla o no funciona de forma correcta?
+* **¿Por qué la memoization falla o no funciona de forma correcta?**
 	- La impelemtanción recursiva con memorización fallo debido a que la cantidad de procesos que estamos realizando es muy alta, la memorización colabora a reducir algunos de estos pero aun así se siguen necesitando muchos procesos por lo cual no es una solución óptima para este ejercicio. 
     - La implementación iterativa usando memorización no fallo, solamente se borra cuando no se ejecuta la función dentro de 5 minutos.
-* ¿Cómo funciona el sistema de facturación de las Function App?
-    - 
+    
+* **¿Cómo funciona el sistema de facturación de las Function App?**
+
+     - Estas se facturan sobre la base del consumo , está se mide en GB-s (Gigabytes-segundos ), este consumo es calculado realizando la multiplicación de el tamaño de la memoria en Gigabyte por el tiempo (milisegundos) que tarda la ejecución de la función.
+	
 * Informe
 
 Ejecutamos newman con una nueva colección la cual se llama Lab9 y contiene una consulta a la API de la función la cual usa el metodo POST y envía en el cuerpo de la data una variable llamada nth con valor de 1'000.000, lo que haremos para que funcione concurrentemente es ejecutarla 10 veces en una consola diferente cada una, mantremos un número de 10 iteraciones por petición para así poder sacar un número promedio más acertado.
