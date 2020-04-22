@@ -69,9 +69,13 @@ Siguiendo con las instrucciones dejamos de hacer peticiones por más de 5 minuto
     - Esto implica que que una parte de la aplicacion se correra en maquinas locales, esta caracteristica nos mermitenejecutar procesos por lotes en horas especificas entre otras cosas.
 
 * ¿Por qué es necesario crear un Storage Account de la mano de un Function App?
-    - 
+    -   La cuenta de almacenamiento proporciona un espacio de nombres único para sus datos de Azure Storage al que se puede acceder desde cualquier lugar del mundo a través de HTTP o HTTPS, esto nos otorga mas seguridad en los proyectos o desarrollos, asi mismo esta cuenta contiene todos los objetos de datos de Azure Storage como blobs, archivos, entre otros.
+
 * ¿Cuáles son los tipos de planes para un Function App?, ¿En qué se diferencias?, mencione ventajas y desventajas de cada uno de ellos.
-    - 
+    - Azure nos ofrece 2 opciones grandes, la primera es adquiriendo planes, esotos de dividen en free, shared, basic, standar, premium e isolate; a continuación vemos la imagen de los planes.
+    
+    
+    
 * ¿Por qué la memoization falla o no funciona de forma correcta?
 	- La impelemtanción recursiva con memorización fallo debido a que la cantidad de procesos que estamos realizando es muy alta, la memorización colabora a reducir algunos de estos pero aun así se siguen necesitando muchos procesos por lo cual no es una solución óptima para este ejercicio. 
     - La implementación iterativa usando memorización no fallo, solamente se borra cuando no se ejecuta la función dentro de 5 minutos.
